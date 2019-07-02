@@ -44,6 +44,7 @@ export default {
             this.loading = true
             setTimeout(() => {
                 this.loading = false
+                this.$router.push("/table")
             },1000)
         }
     }
