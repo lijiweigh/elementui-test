@@ -37,7 +37,7 @@
                         <el-button :disabled="disabled" type="danger" @click="mulRemove">批量删除</el-button>
                     </el-col>
                     <el-col :span="6" :offset="14">
-                        <el-pagination layout="prev,pager,next" :current-page.sync="curPage" :total="50" :page-size="10" background @current-change="clickPage" @next-click="nextClick" @pre-click="preClick"></el-pagination>
+                        <el-pagination layout="prev,pager,next" :current-page.sync="curPage" :total="50" :page-size="10" background @current-change="clickPage" ></el-pagination>
                     </el-col>
                 </el-row>
             </el-footer>

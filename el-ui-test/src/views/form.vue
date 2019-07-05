@@ -50,6 +50,16 @@
                 <el-input type="textarea" autosize resize="none" v-model="formData.xingshi"></el-input>
             </el-form-item>
         </el-form>
+
+        <el-upload style="margin-bottom: 50px;" action="https://aaa.com" :on-preview="handlePreview" multiple :file-list="fileList" list-type="picture-card" :auto-upload="false" :on-change="picChange"></el-upload>
+        <el-calendar v-model="calendarDate" :range="['2019-03-04', '2019-03-24']">
+            
+        </el-calendar>
+        <el-dialog  :title="'el-scrollbar'" :visible.sync="visible" >
+            <el-scrollbar :wrapClass="'myul'" tag="ul">
+                <li v-for="(item, index) in 100" :key="index">{{item}}</li>
+            </el-scrollbar>
+        </el-dialog>
     </div>
 </template>
 
@@ -62,22 +72,73 @@ export default {
             formData: {name: "", region: "",date: "", time: "",immediate: false, xingzhi: ["性质一","性质二"], special: "",xingshi: ""},
             checkAll: false,
             is: true,
-            radioGroup: ""
+            radioGroup: "",
+            fileList: [],
+            calendarDate: new Date(),
+            visible: true,
+            first: true,
+            datecells: []
         }
     },
     methods: {
         indeChange(value) {
             this.formData.xingzhi = value ? options : []
             this.is = false
+        },
+        picChange (file, fileList) {
+            console.log(file)
+            console.log(fileList)
+            console.log(this.fileList)
+            let url = URL.createObjectURL(file.raw)
+            console.log(url)
+        },
+        handlePreview (file) {
+            console.log(file)
+        },
+        handleClick (date, data) {
+            // if (data.isSelected) {
+            //     if(this.first) {
+            //         this.first = false
+            //         return "first"
+            //     } else {
+            //         // this.visible = true
+            //     }
+                
+            // } else {
+            //     return "aaaa"
+            // }
+            return "a"
         }
+
+    },
+    mounted () {
+        this.$nextTick(() => {
+            console.log(this.$refs.datecell)
+            this.datecells = document.querySelectorAll(".el-calendar-day")
+            console.log(this.datecells)
+            this.datecells.forEach(item => {
+                item.addEventListener("click", () => {
+                    item.innerHTML = "html"
+                })
+            })
+        })
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scope>
 .form {
     padding: 20px;
     max-width: 500px;
+}
+
+.mydialog {
+    max-height: 80%;
+}
+
+.myul {
+    max-height: 80vh;
+    overflow-x:hidden; 
 }
 </style>
 
